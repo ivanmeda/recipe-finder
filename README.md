@@ -1,36 +1,156 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍳 FlavorMap — Discover Recipes, Powered by AI
 
-## Getting Started
+> Your smart kitchen companion. Browse thousands of recipes by category, search by name, or describe what you're craving — AI finds the perfect match.
 
-First, run the development server:
+[![Live Demo](https://img.shields.io/badge/▶_Live_Demo-Visit_FlavorMap-FF6B35?style=for-the-badge&logo=vercel&logoColor=white)](https://recipe-finder-dun-nine.vercel.app)
+[![GitHub](https://img.shields.io/badge/GitHub-Source_Code-181717?style=for-the-badge&logo=github)](https://github.com/ivanmeda/recipe-finder)
+
+---
+
+## 🚀 Live Demo
+
+**👉 [https://recipe-finder-dun-nine.vercel.app](https://recipe-finder-dun-nine.vercel.app)**
+
+---
+
+## 📸 Screenshots
+
+> _Screenshots coming soon — stay tuned!_
+
+<!-- Add screenshots here:
+![Home Page](./docs/screenshots/home.png)
+![Recipe Detail](./docs/screenshots/detail.png)
+![AI Search](./docs/screenshots/ai-search.png)
+-->
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🥩 **Browse by Category** | Explore recipes across categories — Beef, Chicken, Pasta, Seafood, Dessert, Vegan, and more |
+| 🔍 **Search by Name** | Instantly find recipes by typing a dish name |
+| 🤖 **AI Smart Search** | Describe what you're craving in natural language and AI finds matching recipes |
+| 📖 **Full Recipe Detail** | Ingredients with images, step-by-step instructions, YouTube video embed, and original source link |
+| 🇷🇸🇬🇧 **Serbian / English Toggle** | Full UI translation — switch languages with one click |
+| 📱 **Mobile-First Design** | Responsive, kitchen-friendly layout that works on any device |
+
+---
+
+## 🛠 Tech Stack
+
+| Technology | Purpose |
+|-----------|---------|
+| [Next.js 16](https://nextjs.org/) (App Router) | React framework with server components & API routes |
+| [TypeScript](https://www.typescriptlang.org/) | Type-safe development |
+| [Tailwind CSS 4](https://tailwindcss.com/) | Utility-first styling |
+| [TheMealDB API](https://www.themealdb.com/api.php) | Recipe data source (categories, meals, ingredients) |
+| [OpenAI GPT-4.1-nano](https://openai.com/) | AI-powered natural language recipe search |
+| [Vercel](https://vercel.com/) | Deployment & hosting |
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── app/
+│   ├── api/
+│   │   └── ai-search/
+│   │       └── route.ts          # AI search API endpoint (OpenAI)
+│   ├── recipe/
+│   │   └── [id]/
+│   │       ├── page.tsx          # Recipe detail page (server)
+│   │       └── RecipePageClient.tsx  # Recipe detail client component
+│   ├── globals.css               # Global styles
+│   ├── layout.tsx                # Root layout
+│   ├── page.tsx                  # Home page (server)
+│   ├── HomeClient.tsx            # Home page client component
+│   └── favicon.ico
+├── components/
+│   ├── AiSearch.tsx              # AI-powered search component
+│   ├── CategoryGrid.tsx          # Category browsing grid
+│   ├── Hero.tsx                  # Hero section
+│   ├── LangProvider.tsx          # i18n context provider
+│   ├── LangToggle.tsx            # Language switch button
+│   ├── Loader.tsx                # Loading spinner
+│   ├── RecipeDetail.tsx          # Full recipe view
+│   ├── RecipeList.tsx            # Recipe card grid
+│   └── SearchBar.tsx             # Search input component
+└── lib/
+    ├── api.ts                    # TheMealDB API client & helpers
+    └── i18n.ts                   # Translation strings (SR/EN)
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 18+ installed
+- [OpenAI API Key](https://platform.openai.com/api-keys) (for AI search feature)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/ivanmeda/recipe-finder.git
+cd recipe-finder
+
+# Install dependencies
+npm install
+```
+
+### Environment Variables
+
+Create a `.env.local` file in the project root:
+
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+### Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🌐 API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+FlavorMap uses [TheMealDB](https://www.themealdb.com/api.php) — a free, open recipe database.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Endpoint | Usage |
+|----------|-------|
+| `/categories.php` | Fetch all recipe categories |
+| `/filter.php?c={category}` | List meals by category |
+| `/search.php?s={query}` | Search meals by name |
+| `/lookup.php?i={id}` | Get full meal details by ID |
 
-## Deploy on Vercel
+AI search is powered by a custom `/api/ai-search` route that uses **OpenAI GPT-4.1-nano** to interpret natural language queries and match them to TheMealDB results.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+<div align="center">
+
+**Built with ❤️ by [Ivan Meda](https://github.com/ivanmeda)**
+
+</div>
